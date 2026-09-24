@@ -1,30 +1,18 @@
-# reklam-etki-analizi
-Çoklu Lineer Regresyon modeli kullanılarak reklam harcamalarının satışlar üzerindeki etkisinin analizi ve tahmini.
-# 📈 Satış Tahmini: Çoklu Lineer Regresyon Analizi 
-*(Sales Prediction with Multiple Linear Regression)*
+# Reklam harcamaları ve satış tahmini
 
-Bu proje, bir şirketin çeşitli kanallara (TV, Radyo ve Gazete) ayırdığı reklam bütçelerinin toplam satışlar üzerindeki etkisini incelemek ve makine öğrenmesi teknikleri kullanarak gelecekteki satışları tahmin etmek amacıyla hazırlanmıştır.
+TV, radyo ve gazete reklam bütçeleriyle satış miktarı arasındaki ilişkiyi inceleyen bir regresyon çalışması. Bu çalışma satış tahmini içindir; reklamların nedensel etkisini veya yatırım getirisini (ROI) ölçmez.
 
-## 🎯 Projenin Amacı
-Veri bilimi ve makine öğrenmesi araçlarını kullanarak:
-* Hangi reklam kanalının satışlara en yüksek getiriyi (ROI) sağladığını tespit etmek.
-* İşe yaramayan reklam harcamalarını belirleyerek bütçe optimizasyonu sağlamak.
-* Çoklu Lineer Regresyon modeli kurarak yeni bütçe planlarına göre satış tahmini yapmak.
+## Veri ve yöntem
 
-## 📊 Kullanılan Veri Seti
-Projede Kaggle platformunda yer alan **"Advertising Dataset"** kullanılmıştır. Veri setinde 200 farklı pazardaki reklam harcamaları ve karşılığında elde edilen satış rakamları (bin adet cinsinden) bulunmaktadır.
-* **Bağımsız Değişkenler (Özellikler):** TV, Radyo, Gazete harcamaları.
-* **Bağımlı Değişken (Hedef):** Satışlar (Sales).
+- Veri: [Advertising veri seti](https://www.statlearning.com/s/Advertising.csv), 200 pazar; TV, Radio, Newspaper bütçeleri ve Sales.
+- Kod ve veri: [not defteri](reklam_etki_analizi/reklam_etki_analizi.ipynb) · [CSV](reklam_etki_analizi/Advertising.csv).
+- %80 eğitim / %20 test ayrımı (random_state=42); scikit-learn LinearRegression.
+- Testte üç değişkenli modelin R² değeri yaklaşık **0,90**, MSE değeri **3,17**. Gazete değişkeni çıkarıldığında test R² değeri **0,9006**.
 
-## 🛠️ Kullanılan Teknolojiler ve Kütüphaneler
-* **Python** (Veri manipülasyonu ve modelleme)
-* **Pandas & NumPy** (Veri analizi)
-* **Scikit-Learn** (Makine öğrenmesi ve model değerlendirme)
-* **Matplotlib & Seaborn** (Veri görselleştirme ve Korelasyon Isı Haritası)
+## İş yorumu ve sınırlar
 
-## 💡 Temel Bulgular ve İş İçgörüleri
-Gerçekleştirilen Keşifçi Veri Analizi (EDA) ve modelleme sonucunda şu kritik iş içgörüleri elde edilmiştir:
+Bu veri setinde TV ve radyo bütçeleri satış tahminiyle ilişkili görünüyor. Gazete değişkeninin ek tahmin katkısı bu ayrımda düşük. Katsayılar ve korelasyonlar tek başına kanalın gerçek getirisi, nedensel etkisi veya bütçe değişikliğinin sonucunu göstermez. Bütçe kararı için kâr/maliyet verisi ve uygun bir deney ya da nedensel ölçüm gerekir.
 
-1. **Yüksek Tahmin Gücü:** Kurulan Çoklu Lineer Regresyon modeli, satışlardaki değişimin **%90'ını** ($R^2 = 0.90$) açıklayabilmektedir.
-2. **En Verimli Kanallar:** Satışlar üzerinde en büyük pozitif etkiye sahip reklam kanallarının sırasıyla **TV** ve **Radyo** olduğu gözlemlenmiştir.
-3. **Bütçe Optimizasyonu (Özellik Seçimi):** Korelasyon analizi incelendiğinde, **Gazete** reklamlarının satışlar üzerinde neredeyse hiçbir anlamlı etkisi olmadığı tespit edilmiştir. Modelin başarısını düşürmemek ve sadeliği korumak adına Gazete verisi modelden çıkarılmış ve kaynakların TV/Radyo kanallarına kaydırılması önerilmiştir.
+## Çalıştırma
+
+Python 3.10+ ile pandas, numpy, matplotlib, seaborn, scikit-learn ve jupyter paketlerini kurun. reklam_etki_analizi klasöründe Jupyter'ı başlatıp not defterini açın; not defteri CSV'yi aynı klasörden okur.
